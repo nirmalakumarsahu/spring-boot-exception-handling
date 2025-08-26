@@ -14,6 +14,7 @@ public class ProductUtil {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
+                .quantity(product.getQuantity())
                 .build();
     }
 
@@ -22,6 +23,7 @@ public class ProductUtil {
                 .name(productRequest.name())
                 .description(productRequest.description())
                 .price(productRequest.price())
+                .quantity(productRequest.quantity())
                 .build();
     }
 
