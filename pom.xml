@@ -16,7 +16,7 @@
 	<name>spring-boot-exception-handling</name>
 	<description>com.sahu.spring-boot-basics</description>
     <url>https://example.comm</url>
-    
+
 	<properties>
 		<java.version>21</java.version>
 	</properties>
