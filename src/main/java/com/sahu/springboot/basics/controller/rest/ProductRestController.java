@@ -4,7 +4,6 @@ import com.sahu.springboot.basics.dto.ApiResponse;
 import com.sahu.springboot.basics.dto.ProductRequest;
 import com.sahu.springboot.basics.dto.ProductResponse;
 import com.sahu.springboot.basics.service.ProductService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,30 +19,31 @@ public class ProductRestController {
     private final ProductService productService;
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<ApiResponse<ProductResponse>> getById(@PathVariable Long id, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<ApiResponse<ProductResponse>> getById(@PathVariable Long id) {
         return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Product Found Successfully!",
-                productService.findById(id), httpServletRequest.getRequestURI())
+                productService.findById(id))
         );
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<ApiResponse<ProductResponse>> getByName(@PathVariable String name, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<ApiResponse<ProductResponse>> getByName(@PathVariable String name) {
         return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Product Found Successfully!",
-                productService.findByName(name), httpServletRequest.getRequestURI())
+                productService.findByName(name))
         );
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ProductResponse>>> all(HttpServletRequest httpServletRequest) {
+    public ResponseEntity<ApiResponse<List<ProductResponse>>> all() {
         return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Products Found",
-                productService.findAll(),  httpServletRequest.getRequestURI())
+                productService.findAll())
         );
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<ProductResponse>> add(@RequestBody ProductRequest productRequest, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<ApiResponse<ProductResponse>> add(@RequestBody ProductRequest productRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(HttpStatus.CREATED, "Product Created",
-                productService.add(productRequest), httpServletRequest.getRequestURI()));
+                productService.add(productRequest))
+        );
     }
 
 }

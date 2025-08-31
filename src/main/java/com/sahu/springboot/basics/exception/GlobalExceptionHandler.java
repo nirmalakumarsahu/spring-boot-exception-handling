@@ -1,7 +1,6 @@
 package com.sahu.springboot.basics.exception;
 
 import com.sahu.springboot.basics.dto.ApiResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,30 +10,27 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ApiResponse<String>> handleProductNotFoundException(ProductNotFoundException productNotFoundException,
-                                                                              HttpServletRequest httpServletRequest)
+    public ResponseEntity<ApiResponse<String>> handleProductNotFoundException(ProductNotFoundException productNotFoundException)
     {
-        return buildErrorResponse(HttpStatus.NOT_FOUND, productNotFoundException.getMessage(), httpServletRequest);
+        return buildErrorResponse(HttpStatus.NOT_FOUND, productNotFoundException.getMessage());
     }
 
     @ExceptionHandler(ProductAlreadyExistException.class)
-    public ResponseEntity<ApiResponse<String>> handleProductAlreadyExistException(ProductAlreadyExistException productAlreadyExistException,
-                                                                                  HttpServletRequest httpServletRequest)
+    public ResponseEntity<ApiResponse<String>> handleProductAlreadyExistException(ProductAlreadyExistException productAlreadyExistException)
     {
-        return buildErrorResponse(HttpStatus.CONFLICT, productAlreadyExistException.getMessage(), httpServletRequest);
+        return buildErrorResponse(HttpStatus.CONFLICT, productAlreadyExistException.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<String>> handleGenericException(Exception exception, HttpServletRequest httpServletRequest) {
-        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), httpServletRequest);
+    public ResponseEntity<ApiResponse<String>> handleGenericException(Exception exception) {
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
     }
 
-    private ResponseEntity<ApiResponse<String>> buildErrorResponse(HttpStatus httpStatus, String message, HttpServletRequest httpServletRequest) {
+    private ResponseEntity<ApiResponse<String>> buildErrorResponse(HttpStatus httpStatus, String message) {
         ApiResponse<String> response = ApiResponse.error(
                 httpStatus,
                 message,
-                null,
-                httpServletRequest.getRequestURI()
+                null
         );
 
         return ResponseEntity.status(httpStatus).body(response);
