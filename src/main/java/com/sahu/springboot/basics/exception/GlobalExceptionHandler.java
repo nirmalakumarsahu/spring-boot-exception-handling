@@ -27,13 +27,11 @@ public class GlobalExceptionHandler {
     }
 
     private ResponseEntity<ApiResponse<String>> buildErrorResponse(HttpStatus httpStatus, String message) {
-        ApiResponse<String> response = ApiResponse.error(
+        return ApiResponse.error(
                 httpStatus,
                 message,
                 null
         );
-
-        return ResponseEntity.status(httpStatus).body(response);
     }
 
 }
