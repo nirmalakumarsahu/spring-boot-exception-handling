@@ -6,11 +6,11 @@ import com.sahu.springboot.basics.dto.ProductResponse;
 import java.util.List;
 
 public interface ProductService {
-    ProductResponse  findById(Long id);
+    ProductResponse  getProductById(Long id);
 
-    ProductResponse findByName(String name);
+    ProductResponse getProductByName(String name);
 
-    List<ProductResponse> findAll();
+    List<ProductResponse> getAllProducts();
 
-    ProductResponse add(ProductRequest productRequest);
+    ProductResponse createProduct(ProductRequest productRequest);
 }

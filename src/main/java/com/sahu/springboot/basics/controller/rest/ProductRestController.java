@@ -19,27 +19,27 @@ public class ProductRestController {
     private final ProductService productService;
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<ApiResponse<ProductResponse>> getById(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<ProductResponse>> getProductById(@PathVariable Long id) {
         return ApiResponse.success(HttpStatus.OK, "Product Found Successfully!",
-                productService.findById(id));
+                productService.getProductById(id));
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<ApiResponse<ProductResponse>> getByName(@PathVariable String name) {
+    public ResponseEntity<ApiResponse<ProductResponse>> getProductByName(@PathVariable String name) {
         return ApiResponse.success(HttpStatus.OK, "Product Found Successfully!",
-                productService.findByName(name));
+                productService.getProductByName(name));
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ProductResponse>>> all() {
+    public ResponseEntity<ApiResponse<List<ProductResponse>>> getAllProducts() {
         return ApiResponse.success(HttpStatus.OK, "Products Found",
-                productService.findAll());
+                productService.getAllProducts());
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<ProductResponse>> add(@RequestBody ProductRequest productRequest) {
+    public ResponseEntity<ApiResponse<ProductResponse>> createProduct(@RequestBody ProductRequest productRequest) {
         return ApiResponse.success(HttpStatus.CREATED, "Product Created",
-                productService.add(productRequest));
+                productService.createProduct(productRequest));
     }
 
 }

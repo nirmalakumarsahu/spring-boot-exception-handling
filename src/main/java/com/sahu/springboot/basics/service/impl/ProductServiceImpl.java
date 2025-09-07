@@ -20,26 +20,26 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public ProductResponse findById(Long id) {
+    public ProductResponse getProductById(Long id) {
         return productRepository.findById(id).map(ProductUtil::toProductResponse)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id " + id));
     }
 
     @Override
-    public ProductResponse findByName(String name) {
+    public ProductResponse getProductByName(String name) {
         return productRepository.findByName(name).map(ProductUtil::toProductResponse)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with name " + name));
 
     }
 
     @Override
-    public List<ProductResponse> findAll() {
+    public List<ProductResponse> getAllProducts() {
         return productRepository.findAll().stream().map(ProductUtil::toProductResponse)
                 .toList();
     }
 
     @Override
-    public ProductResponse add(ProductRequest productRequest) {
+    public ProductResponse createProduct(ProductRequest productRequest) {
         if(productRepository.existsByName(productRequest.name())) {
             throw new ProductAlreadyExistException("Product is already exist with name "+productRequest.name());
         }
